@@ -1,0 +1,2 @@
+README.md
+Design a web application that is going to show he profit of an item based on the wholesale price they prodive and the MRP the shop sells it for. It should show the profit that specific item is making. The all product with the required data should be stored in PostgreSQL. I should create a backend and frontend code that will do this in a webapplication. It should call the API fetch it. I should use swagger. for this should i use the combo or c# and js or Java and sprintboot
