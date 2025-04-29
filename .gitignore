@@ -1,0 +1,10 @@
+# Ignore Visual Studio files
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Ignore other IDE files (e.g., Rider, VSCode)
+.idea/
+.vscode/
