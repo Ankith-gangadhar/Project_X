@@ -1,37 +1,23 @@
-import requests
-from bs4 import BeautifulSoup
 import pandas as pd
 
+# Load the CSV sheet (use read_csv instead of read_excel)
+file_path = 'C:/Users/ankit/Downloads/Item.csv'  # Replace with the path to your CSV file
+df = pd.read_csv(file_path)
 
-def scrape_products(url):
-    # Send a GET request to the webpage
-    response = requests.get(url)
+# Preview the first few rows to understand the structure
+print(df.head())
 
-    # Check if the request was successful
-    if response.status_code != 200:
-        print(f"Failed to fetch page: {url}")
-        return []
+# Extract relevant columns: Product ID, Product Name, Category Name, Selling Price
+df_filtered = df[['Product ID', 'Product Name', 'Category Name', 'Selling Price']]
 
-    # Parse the HTML content using BeautifulSoup
-    soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Find all product containers on the page (adjust according to the site's HTML structure)
-    products = soup.find_all('div', class_='product-item')  # Adjust this class based on the page's HTML
+# Remove 'INR ' from the 'Selling Price' column and convert it to float
+df_filtered.loc[:, 'Selling Price'] = df_filtered['Selling Price'].replace('INR ', '', regex=True).astype(float)
 
-    # Create a list to hold all extracted product data
-    product_data = []
+# Display the filtered data
+print(df_filtered.head())
 
-    # Loop through all products and extract required details
-    for product in products:
-        # Extract product name, category, and MRP (Adjust these based on actual HTML structure)
-        name = product.find('h2', class_='product-title').text.strip() if product.find('h2',
-                                                                                       class_='product-title') else "Unknown"
-        category = product.find('span', class_='category').text.strip() if product.find('span',
-                                                                                        class_='category') else "Unknown"
-        mrp = product.find('span', class_='mrp').text.strip() if product.find('span', class_='mrp') else "Unknown"
-
-        # Add the extracted data to the product_data list
-        product_data.append({'Name': name, 'Category': category, 'MRP': mrp})
-
-    # Return the extracted data
-    return product_data
+# Optionally, you can save the filtered data to a new Excel file or CSV for further processing
+df_filtered.to_excel('filtered_products.xlsx', index=False)
+# Or, for CSV
+# df_filtered.to_csv('filtered_products.csv', index=False)
