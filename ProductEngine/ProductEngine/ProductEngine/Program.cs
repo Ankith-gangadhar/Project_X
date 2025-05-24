@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProductEngine.Data;
+using ProductEngine.Interfaces;
+using ProductEngine.Repositories;
 using ProductEngine.Services;
 using System;
 
@@ -11,7 +13,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ProductService >();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 //PostgreSQL DbContext
 builder.Services.AddDbContext<ProductEngineContext>(options =>

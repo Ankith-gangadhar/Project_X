@@ -1,39 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProductEngine.Services;
 using ProductEngine.Models;
+using ProductEngine.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProductEngine.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
-    { 
+    {
         private readonly ProductService _productService;
 
         public ProductsController(ProductService productService)
         {
-            _productService = productService;  
-        }
-        
-        // POST api/products
-        [HttpPost]
-        public ActionResult<Product> CreateProduct([FromBody] Product product)
-        {
-            var calculatedProduct = _productService.CalculateProfit(product);
-            return Ok(calculatedProduct);  
+            _productService = productService;
         }
 
-        // GET api/products
-        [HttpGet]
-        public ActionResult<List<Product>> GetProducts()
+        [HttpPost]
+        public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
         {
-            var products = new List<Product>
-            {
-                new Product { Id = 1, Name = "Product A", WholesalePrice = 100, MRP = 150 },
-                new Product { Id = 2, Name = "Product B", WholesalePrice = 120, MRP = 180 }
-            };
+            var savedProduct = await _productService.CalculateAndSaveProductAsync(product);
+            return Ok(savedProduct);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Product>>> GetProducts()
+        {
+            // Now load products from database asynchronously
+            var products = await _productService.GetAllProductsAsync();
             return Ok(products);
         }
-
     }
 }
