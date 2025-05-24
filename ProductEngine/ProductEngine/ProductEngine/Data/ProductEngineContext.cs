@@ -8,4 +8,4 @@ namespace ProductEngine.Data
         public ProductEngineContext(DbContextOptions<ProductEngineContext> options) : base(options) { }
         public DbSet<Product> Products { get; set; }
     }
-}
+}   
