@@ -7,14 +7,14 @@ namespace ProductEngine.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
-    {
+    { 
         private readonly ProductService _productService;
 
         public ProductsController(ProductService productService)
         {
             _productService = productService;  
         }
-
+        
         // POST api/products
         [HttpPost]
         public ActionResult<Product> CreateProduct([FromBody] Product product)
