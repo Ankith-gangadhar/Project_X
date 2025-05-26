@@ -1,0 +1,75 @@
+# .NET build folders
+bin/
+obj/
+out/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider IDE
+.idea/
+
+# Build artifacts
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+*.apphost.exe
+*.db
+
+# ASP.NET Core
+wwwroot/lib/
+*.db-shm
+*.db-wal
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Entity Framework
+migrations/
+
+# DotCover
+*.dotCover
+
+# Logs
+*.log
+
+# Local secrets
+secrets.json
+
+# Configuration
+appsettings.Development.json
+appsettings.Local.json
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# GitHub Copilot & IntelliCode
+copilot.*
+.vs/
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Others
+*.sourcemap
+*.js.map
+*.sourcelink.json

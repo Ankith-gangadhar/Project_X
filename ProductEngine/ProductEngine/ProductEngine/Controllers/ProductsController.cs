@@ -18,9 +18,9 @@ namespace ProductEngine.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
+        public async Task<ActionResult<ProductCreateDto>> CreateProduct([FromBody] ProductCreateDto productcreatedto)
         {
-            var savedProduct = await _productService.CalculateAndSaveProductAsync(product);
+            var savedProduct = await _productService.CalculateAndSaveProductAsync(productcreatedto);
             return Ok(savedProduct);
         }
 

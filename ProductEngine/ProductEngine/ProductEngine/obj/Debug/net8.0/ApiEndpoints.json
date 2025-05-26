@@ -8,14 +8,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "product",
-        "Type": "ProductEngine.Models.Product",
+        "Name": "productcreatedto",
+        "Type": "ProductEngine.Models.ProductCreateDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ProductEngine.Models.Product",
+        "Type": "ProductEngine.Models.ProductCreateDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

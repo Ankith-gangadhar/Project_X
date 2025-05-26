@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProductEngine.Data;
 using ProductEngine.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProductEngine.Services
@@ -14,22 +15,26 @@ namespace ProductEngine.Services
             _context = context;
         }
 
-        public async Task<Product> CalculateAndSaveProductAsync(Product product)
+        public async Task<Product> CalculateAndSaveProductAsync(ProductCreateDto dto)
         {
-            // Calculate profit
-            product.ProfitPerUnit = product.MRP - product.WholesalePrice;
-            product.ProfitPercentage = (product.ProfitPerUnit / product.WholesalePrice) * 100;
+            var product = new Product
+            {
+                Name = dto.Name,
+                WholesalePrice = dto.WholesalePrice,
+                MRP = dto.MRP,
+                ProfitPerUnit = dto.MRP - dto.WholesalePrice,
+                ProfitPercentage = dto.WholesalePrice == 0 ? 0 : ((dto.MRP - dto.WholesalePrice) / dto.WholesalePrice) * 100
+            };
 
-            // Add to DbContext and save
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
             return product;
         }
+
         public async Task<List<Product>> GetAllProductsAsync()
         {
             return await _context.Products.ToListAsync();
         }
-
     }
 }
