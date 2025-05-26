@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProductEngine.Data;
+﻿using ProductEngine.Interfaces;
 using ProductEngine.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,11 +8,11 @@ namespace ProductEngine.Services
 {
     public class ProductService
     {
-        private readonly ProductEngineContext _context;
+        private readonly IProductRepository _repository;
 
-        public ProductService(ProductEngineContext context)
+        public ProductService(IProductRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public async Task<Product> CalculateAndSaveProductAsync(ProductCreateDto dto)
@@ -26,15 +26,22 @@ namespace ProductEngine.Services
                 ProfitPercentage = dto.WholesalePrice == 0 ? 0 : ((dto.MRP - dto.WholesalePrice) / dto.WholesalePrice) * 100
             };
 
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+            return await _repository.AddAsync(product);
+        }
 
-            return product;
+        public async Task<Product> UpdateProductAsync(ProductCreateDto dto)
+        {
+            var existing = await _repository.GetByNameAsync(dto.Name);
+            if (existing == null)
+                throw new InvalidOperationException("Product not found.");
+
+            return await _repository.UpdateByNameAsync(dto.Name, dto.WholesalePrice, dto.MRP)
+                   ?? throw new Exception("Update failed.");
         }
 
         public async Task<List<Product>> GetAllProductsAsync()
         {
-            return await _context.Products.ToListAsync();
+            return await _repository.GetAllAsync();
         }
     }
 }

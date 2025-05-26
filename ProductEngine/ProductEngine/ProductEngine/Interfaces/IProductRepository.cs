@@ -8,5 +8,8 @@ namespace ProductEngine.Interfaces
     {
         Task<Product> AddAsync(Product product);
         Task<List<Product>> GetAllAsync();
+        Task<Product?> UpdateByNameAsync(string name, decimal newWholesalePrice, decimal newMRP);
+        Task<bool> DeleteByNameAsync(string name);
+        Task<Product?> GetByNameAsync(string name);
     }
 }
