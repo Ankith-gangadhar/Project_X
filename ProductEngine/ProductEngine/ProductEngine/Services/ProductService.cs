@@ -14,7 +14,13 @@ namespace ProductEngine.Services
         {
             _repository = repository;
         }
-
+        public async Task<Product> GetProductByNameAsync(string name)
+        {
+            var product = await _repository.GetByNameAsync(name);
+            if (product == null)
+                throw new InvalidOperationException("Product not found.");
+            return product;
+        }
         public async Task<Product> CalculateAndSaveProductAsync(ProductCreateDto dto)
         {
             var product = new Product

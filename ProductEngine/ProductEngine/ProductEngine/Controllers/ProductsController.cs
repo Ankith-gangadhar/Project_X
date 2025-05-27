@@ -32,6 +32,23 @@ namespace ProductEngine.Controllers
             return Ok(products);
         }
 
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Product>> GetProductByName(string name)
+        {
+            try
+            {
+                var product = await _productService.GetProductByNameAsync(name);
+                if (product == null)
+                {
+                    return NotFound($"Product with name '{name}' not found.");
+                }
+                return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         [HttpPut]
         public async Task<ActionResult<ProductCreateDto>> UpdateProduct([FromBody] ProductCreateDto productcreatedto)
         {
