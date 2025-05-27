@@ -42,7 +42,10 @@ namespace ProductEngine.Repositories
 
             product.WholesalePrice = newWholesalePrice;
             product.MRP = newMrp;
-
+            var ProfitPerUnit = product.MRP - product.WholesalePrice;
+            var ProfitPercentage = product.WholesalePrice == 0 ? 0 : ((product.MRP - product.WholesalePrice) / product.WholesalePrice) * 100;
+            product.ProfitPerUnit = ProfitPerUnit;
+            product.ProfitPercentage = ProfitPercentage;
             await _context.SaveChangesAsync();
             return product;
         }
@@ -60,3 +63,4 @@ namespace ProductEngine.Repositories
         }
     }
 }
+ 
