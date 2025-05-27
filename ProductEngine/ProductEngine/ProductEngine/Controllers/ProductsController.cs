@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductEngine.Models;
 using ProductEngine.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ProductEngine.Controllers
 {
@@ -18,6 +17,7 @@ namespace ProductEngine.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Creates a new product", Description = "Calculates and saves a new product in the database. Returns the created product details.")]
         public async Task<ActionResult<ProductCreateDto>> CreateProduct([FromBody] ProductCreateDto productcreatedto)
         {
             var savedProduct = await _productService.CalculateAndSaveProductAsync(productcreatedto);
@@ -25,6 +25,7 @@ namespace ProductEngine.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(Summary = "Gets all products", Description = "Fetches all products from the database.")]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
             // Now load products from database asynchronously
@@ -33,6 +34,7 @@ namespace ProductEngine.Controllers
         }
 
         [HttpGet("{name}")]
+        [SwaggerOperation(Summary = "Gets a product by name", Description = "Fetches a product from the database by its name.")]
         public async Task<ActionResult<Product>> GetProductByName(string name)
         {
             try
@@ -50,6 +52,7 @@ namespace ProductEngine.Controllers
             }
         }
         [HttpPut]
+        [SwaggerOperation(Summary = "Updates an existing product", Description = "Updates the details of an existing product in the database.")]
         public async Task<ActionResult<ProductCreateDto>> UpdateProduct([FromBody] ProductCreateDto productcreatedto)
         {
             try
