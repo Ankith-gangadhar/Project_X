@@ -28,7 +28,6 @@ namespace ProductEngine.Controllers
         [SwaggerOperation(Summary = "Gets all products", Description = "Fetches all products from the database.")]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            // Now load products from database asynchronously
             var products = await _productService.GetAllProductsAsync();
             return Ok(products);
         }
@@ -63,6 +62,24 @@ namespace ProductEngine.Controllers
             catch (InvalidOperationException ex)
             {
                 return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpDelete("{name}")]
+        [SwaggerOperation(Summary = "Deletes a product by name", Description = "Deletes a product from the database by its name.")]
+        public async Task<ActionResult> DeleteProduct(string name)
+        {
+            try
+            {
+                var deleted = await _productService.DeleteProductAsync(name);
+                if (!deleted)
+                {
+                    return NotFound($"Product with name '{name}' not found.");
+                }
+                return Ok($"'{name}' is successfully deleted ");
             }
             catch (Exception ex)
             {

@@ -44,7 +44,13 @@ namespace ProductEngine.Services
             return await _repository.UpdateByNameAsync(dto.Name, dto.WholesalePrice, dto.MRP)
                    ?? throw new Exception("Update failed.");
         }
-
+        public async Task<bool> DeleteProductAsync(string name)
+        {
+            var product = await _repository.GetByNameAsync(name);
+            if (product == null)
+                throw new InvalidOperationException("Product not found.");
+            return await _repository.DeleteByNameAsync(name);
+        }
         public async Task<List<Product>> GetAllProductsAsync()
         {
             return await _repository.GetAllAsync();
