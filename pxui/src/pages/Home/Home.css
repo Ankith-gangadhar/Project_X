@@ -1,0 +1,11 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: #f0f4f8;
+}
+
+.heading {
+  color: #1a202c;
+}
