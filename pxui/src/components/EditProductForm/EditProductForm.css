@@ -1,0 +1,13 @@
+.edit-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.edit-product-form input {
+  padding: 0.5rem;
+}
+.edit-product-form button {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
