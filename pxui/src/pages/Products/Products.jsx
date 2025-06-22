@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchProducts, addProduct, updateProduct, deleteProduct } from '../../api/productApi';
+import { getProducts, createProduct, updateProduct, deleteProduct } from '../../api/productApi';
 import ProductList from '../../components/ProductList/ProductList';
 import AddProductForm from '../../components/AddProductForm/AddProductForm';
 import EditProductForm from '../../components/EditProductForm/EditProductForm';
@@ -10,7 +10,7 @@ const Products = () => {
   const [editingProduct, setEditingProduct] = useState(null);
 
   const loadProducts = async () => {
-    const res = await fetchProducts();
+    const res = await getProducts();
     setProducts(res.data);
   };
 
@@ -19,7 +19,7 @@ const Products = () => {
   }, []);
 
   const handleAdd = async (product) => {
-    await addProduct(product);
+    await createProduct(product);
     loadProducts();
   };
 

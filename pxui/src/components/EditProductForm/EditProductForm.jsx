@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './EditProductForm.css';
+import { createProduct } from '../../api/productApi';
 
 const EditProductForm = ({ product, onUpdate, onCancel }) => {
   const [form, setForm] = useState({ name: '', wholesalePrice: '', mrp: '' });
@@ -18,14 +19,19 @@ const EditProductForm = ({ product, onUpdate, onCancel }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    onUpdate({
-      name: form.name,
-      wholesalePrice: parseFloat(form.wholesalePrice),
-      mrp: parseFloat(form.mrp)
-    });
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  const product = {
+    name: form.name,
+    wholesalePrice: parseFloat(form.wholesalePrice),
+    mrp: parseFloat(form.mrp)
   };
+  try {
+    await createProduct(product);
+  } catch (error) {
+    console.error('Failed to add product', error);
+  }
+};
 
   if (!product) return null;
 

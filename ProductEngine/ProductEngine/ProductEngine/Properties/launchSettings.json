@@ -12,7 +12,7 @@
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": true,0
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5007",
       "environmentVariables": {

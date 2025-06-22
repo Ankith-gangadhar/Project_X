@@ -19,7 +19,13 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.EnableAnnotations();
 });
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy => policy.WithOrigins("http://localhost:5173")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
 //PostgreSQL DbContext
 builder.Services.AddDbContext<ProductEngineContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -38,6 +44,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("AllowReactApp");
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 

@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://localhost:5007/api/products'; 
-export const fetchProducts = () => axios.get(BASE_URL);
+const API_BASE_URL = 'http://localhost:5007/api/products'; 
 
-export const fetchProductByName = (name) => axios.get(`${BASE_URL}/${encodeURIComponent(name)}`);
+export const getProducts = () => axios.get(API_BASE_URL);
 
-export const addProduct = (product) => axios.post(BASE_URL, product);
+export const getProductByName = (name) => axios.get(`${API_BASE_URL}/${name}`);
 
-export const updateProduct = (product) => axios.put(BASE_URL, product);
+export const createProduct = (productData) => axios.post(API_BASE_URL, productData);
 
-export const deleteProduct = (name) => axios.delete(`${BASE_URL}/${encodeURIComponent(name)}`);
+export const updateProduct = (productData) => axios.put(API_BASE_URL, productData);
+
+export const deleteProduct = (name) => axios.delete(`${API_BASE_URL}/${name}`);
