@@ -37,7 +37,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-} 
+}
+Datadog.Trace.Tracer.Instance.StartActive("custom-operation");
 
 app.UseHttpsRedirection();
 
