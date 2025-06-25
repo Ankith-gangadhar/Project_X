@@ -34,6 +34,7 @@ jobs:
       - name: Run SonarQube scan
         env: 
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            JAVA_HOME: ${{ env.JAVA_HOME }}
         run: |
             sonar-scanner \
               sonar-scanner \
@@ -42,4 +43,5 @@ jobs:
                 -Dsonar.sources=. \
                 -Dsonar.host.url=https://sonarcloud.io \
                 -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        
               
