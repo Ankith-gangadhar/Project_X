@@ -13,7 +13,7 @@ const Products = () => {
     const res = await getProducts();
     setProducts(res.data);
   };
-
+  
   useEffect(() => {
     loadProducts();
   }, []);
