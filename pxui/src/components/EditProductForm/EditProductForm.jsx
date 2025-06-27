@@ -40,7 +40,7 @@ const EditProductForm = ({ product, onUpdate, onCancel }) => {
       <h2>Edit Product</h2>
       <input name="name" value={form.name} disabled />
       <input name="wholesalePrice" type="number" step="0.01" value={form.wholesalePrice} onChange={handleChange} required />
-      <input name="mrp" type="number" step="0.01" value={form.mrp} onChange={handleChange} required />
+      <input name="rp" type="number" step="0.01" value={form.mrp} onChange={handleChange} required />
       <button type="submit">Update</button>
       <button type="button" onClick={onCancel}>Cancel</button>
     </form>
