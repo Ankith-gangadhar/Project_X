@@ -49,12 +49,12 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DD_SERVICE": "productengine",
-        "DD_ENV": "dev",
-        "DD_VERSION": "1.0.0",
-        "DD_TRACE_ENABLED": "true",
         "DD_AGENT_HOST": "localhost",
+        "DD_ENV": "dev",
+        "DD_SERVICE": "productengine",
         "DD_TRACE_DEBUG": "true",
+        "DD_TRACE_ENABLED": "true",
+        "DD_VERSION": "1.0.0",
         "DD_SITE": "us5.datadoghq.com"
       }
     }
