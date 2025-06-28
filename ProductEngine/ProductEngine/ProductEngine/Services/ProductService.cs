@@ -1,4 +1,5 @@
-﻿using ProductEngine.Interfaces;
+﻿using Datadog.Trace;
+using ProductEngine.Interfaces;
 using ProductEngine.Models;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,10 @@ namespace ProductEngine.Services
         }
         public async Task<List<Product>> GetAllProductsAsync()
         {
-            return await _repository.GetAllAsync();
+            using (var span = Tracer.Instance.StartActive("product.get_by_name"))
+            {
+                return await _repository.GetAllAsync();
+            }
         }
     }
 }

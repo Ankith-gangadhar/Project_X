@@ -38,7 +38,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-Datadog.Trace.Tracer.Instance.StartActive("custom-operation");
+using (var scope = Datadog.Trace.Tracer.Instance.StartActive("custom-operation"))
+{
+    Console.WriteLine("Inside custom Datadog span");
+}
 
 app.UseHttpsRedirection();
 
