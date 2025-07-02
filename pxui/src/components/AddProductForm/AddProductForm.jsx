@@ -17,8 +17,7 @@ const handleSubmit = async (e) => {
     mrp: parseFloat(form.mrp)
   };
   try {
-    const createdProduct = await createProduct(product); 
-    onAdd(createdProduct); 
+    await createProduct(product);
   } catch (error) {
     console.error('Failed to add product', error);
   }
