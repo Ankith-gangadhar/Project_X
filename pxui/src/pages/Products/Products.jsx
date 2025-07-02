@@ -19,8 +19,8 @@ const Products = () => {
   }, []);
 
   const handleAdd = async (product) => {
-    await createProduct(product);
-    loadProducts();
+    const response = await createProduct(product); 
+    setProducts(prev => [...prev, response.data]);
   };
 
   const handleEdit = (product) => {
