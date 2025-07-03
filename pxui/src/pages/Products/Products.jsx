@@ -21,7 +21,7 @@ const Products = () => {
   const handleAdd = async (product) => {
     const response = await createProduct(product); 
     setProducts(prev => [...prev, response.data]);
-  };
+  }; 
 
   const handleEdit = (product) => {
     setEditingProduct(product);
