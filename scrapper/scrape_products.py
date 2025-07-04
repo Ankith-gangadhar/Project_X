@@ -7,6 +7,7 @@ df = pd.read_csv(file_path)
 # Preview the first few rows to understand the structure
 print(df.head())
 
+
 # Extract relevant columns: Product ID, Product Name, Category Name, Selling Price
 df_filtered = df[['Product ID', 'Product Name', 'Category Name', 'Selling Price']]
 
